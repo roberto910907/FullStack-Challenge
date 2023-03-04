@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property float $wind_speed
  * @property string $condition_name
  * @property string $description
-*/
+ */
 class WeatherForecast extends Model
 {
     use HasFactory;

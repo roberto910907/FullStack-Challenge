@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int $id
  * @property string $latitude
  * @property string $longitude
-*/
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;

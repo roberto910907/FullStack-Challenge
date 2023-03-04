@@ -18,8 +18,6 @@ class WeatherForecastService
     }
 
     /**
-     * @param User $user
-     *
      * @throws Exception
      */
     public function updateWeather(User $user): void
@@ -43,16 +41,10 @@ class WeatherForecastService
 
             return $weatherInfo['current'];
         } else {
-            throw new Exception('Failed to retrieve weather information from ' . $weatherApiUrl);
+            throw new Exception('Failed to retrieve weather information from '.$weatherApiUrl);
         }
     }
 
-    /**
-     * @param string $latitude
-     * @param string $longitude
-     *
-     * @return string
-     */
     private function getWeatherApiUrl(string $latitude, string $longitude): string
     {
         return Str::swap([

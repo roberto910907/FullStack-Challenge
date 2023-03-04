@@ -23,9 +23,6 @@ class UpdateUserWeather extends Command
      */
     protected $description = 'Update weather forecast for every existent user';
 
-    /**
-     * @return int
-     */
     public function handle(): int
     {
         $this->info('Starting weather forecast update process...');
