@@ -1,11 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @property float $temperature
+ * @property float $pressure
+ * @property float $humidity
+ * @property float $clouds
+ * @property float $wind_speed
+ * @property string $condition_name
+ * @property string $description
+*/
 class WeatherForecast extends Model
 {
     use HasFactory;
@@ -18,6 +29,7 @@ class WeatherForecast extends Model
         'wind_speed',
         'condition_name',
         'description',
+        'user_id',
     ];
 
     public function user(): BelongsTo
