@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
+ * @property int $id
  * @property string $latitude
  * @property string $longitude
 */
@@ -46,7 +47,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'email_verified_at' => 'datetime',
     ];
 

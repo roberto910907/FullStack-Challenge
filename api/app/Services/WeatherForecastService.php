@@ -7,11 +7,16 @@ namespace App\Services;
 use Exception;
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\WeatherForecast;
 use Illuminate\Support\Facades\Http;
+use App\Repositories\WeatherForecastRepository;
 
 class WeatherForecastService
 {
+    public function __construct(private readonly WeatherForecastRepository $weatherForecastRepository)
+    {
+        //...
+    }
+
     /**
      * @param User $user
      *
@@ -19,28 +24,24 @@ class WeatherForecastService
      */
     public function updateWeather(User $user): void
     {
+        $weatherForecastInfo = $this->retrieveWeatherInfo($user);
+
+        $this->weatherForecastRepository->updateOrCreateFromArray($user->id, $weatherForecastInfo);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function retrieveWeatherInfo(User $user): array
+    {
         $weatherApiUrl = $this->getWeatherApiUrl($user->latitude, $user->longitude);
 
         $response = Http::get($weatherApiUrl);
 
         if ($response->ok()) {
             $weatherInfo = $response->json();
-            $weatherForecast = $weatherInfo['current'];
 
-            if ($weatherForecast) {
-                WeatherForecast::query()->updateOrCreate(
-                    [
-                        'temperature' => $weatherForecast['temp'],
-                        'pressure' => $weatherForecast['pressure'],
-                        'humidity' => $weatherForecast['humidity'],
-                        'clouds' => $weatherForecast['clouds'],
-                        'wind_speed' => $weatherForecast['wind_speed'],
-                        'condition_name' => $weatherForecast['weather'][0]['main'],
-                        'description' => $weatherForecast['weather'][0]['description'],
-                    ],
-                    ['user_id' => $user->id]
-                );
-            }
+            return $weatherInfo['current'];
         } else {
             throw new Exception('Failed to retrieve weather information from ' . $weatherApiUrl);
         }
