@@ -23,7 +23,7 @@ export const useUserStore = defineStore("users", {
     async loadUsers() {
       this.loading = true;
 
-      const { data } = await useFetch<UserResult>("/");
+      const { data } = await useFetch<UserResult>("/users");
 
       this.users = (data.value as UserResult)?.users;
 

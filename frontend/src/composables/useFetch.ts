@@ -7,5 +7,5 @@ export const useFetch = async <T>(
 ): Promise<UseFetchReturn<T>> => {
   const apiUrl: string = import.meta.env.VITE_API_URL;
 
-  return baseFetch(`${apiUrl}/${url}`, options).get().json();
+  return baseFetch(`${apiUrl}${url}`, options).get().json();
 };
