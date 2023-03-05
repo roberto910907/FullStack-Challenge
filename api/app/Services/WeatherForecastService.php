@@ -25,7 +25,7 @@ class WeatherForecastService
     {
         $weatherForecastInfo = $this->retrieveWeatherInfoFromApi($user);
 
-        $this->updateUserWeatherCache($user->id, $user->name, $weatherForecastInfo);
+        $this->updateUserWeatherCache($user, $weatherForecastInfo);
 
         $this->weatherForecastRepository->updateOrCreateFromArray($user->id, $weatherForecastInfo);
     }
@@ -51,6 +51,7 @@ class WeatherForecastService
                 'clouds' => $weatherForecastInfo['clouds'],
                 'wind_speed' => $weatherForecastInfo['wind_speed'],
                 'condition_name' => $weatherForecastInfo['weather'][0]['main'],
+                'weather_icon' => $weatherForecastInfo['weather'][0]['icon'],
                 'description' => $weatherForecastInfo['weather'][0]['description'],
             ];
         } else {
@@ -59,16 +60,18 @@ class WeatherForecastService
     }
 
     /**
-     * @param int $userId
-     * @param string $userName
+     * @param User $user
      * @param array $weatherForecastInfo
      */
-    public function updateUserWeatherCache(int $userId, string $userName, array $weatherForecastInfo): void
+    public function updateUserWeatherCache(User $user, array $weatherForecastInfo): void
     {
-        Cache::rememberForever("weather:user:${userId}", function () use ($userId, $userName, $weatherForecastInfo) {
+        $cacheKey = "weather:user:" . $user->id;
+
+        Cache::rememberForever($cacheKey, function () use ($user, $weatherForecastInfo) {
             return [
-                'id' => $userId,
-                'name' => $userName,
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
                 'weather' => $weatherForecastInfo,
             ];
         });

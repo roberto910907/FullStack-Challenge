@@ -2,7 +2,10 @@ import { defineStore } from "pinia";
 import { useFetch } from "@/composables/useFetch";
 
 type WeatherInfo = {
-  main: string;
+  pressure: string;
+  temperature: string;
+  weather_icon: string;
+  condition_name: string;
   description: string;
 };
 
@@ -24,6 +27,13 @@ export const useUserStore = defineStore("users", {
       loading: false as boolean,
       users: [] as User[],
     };
+  },
+
+  getters: {
+    weatherIconUrl() {
+      return (weatherIcon: string): string =>
+        `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+    },
   },
 
   actions: {

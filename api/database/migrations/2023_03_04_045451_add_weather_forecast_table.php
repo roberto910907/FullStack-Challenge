@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('wind_speed', 10);
             $table->string('condition_name');
             $table->string('description');
+            $table->string('weather_icon');
 
             $table->foreignId('user_id')->constrained('users');
 

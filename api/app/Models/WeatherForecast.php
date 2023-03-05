@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property float $humidity
  * @property float $clouds
  * @property float $wind_speed
+ * @property string weather_icon
  * @property string $condition_name
  * @property string $description
  */
@@ -27,6 +28,7 @@ class WeatherForecast extends Model
         'humidity',
         'clouds',
         'wind_speed',
+        'weather_icon',
         'condition_name',
         'description',
         'user_id',
