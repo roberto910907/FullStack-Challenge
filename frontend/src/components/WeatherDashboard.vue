@@ -1,11 +1,12 @@
 <template>
   <div class="h-100hv grid grid-cols-4 gap-4 p-4">
     <div
-      class="bg-gray-600 w-full rounded border-zinc-700 text-white"
+      class="flex items-center justify-between bg-gray-600 w-full rounded border-zinc-700 text-white"
       v-for="user in users"
       :key="user.id"
     >
-      <p class="p-5">{{ user.id }} {{ user.email }}</p>
+      <p class="p-5">{{ user.name }}</p>
+      <p class="p-5">{{ user.weather.condition_name }}</p>
     </div>
   </div>
 </template>

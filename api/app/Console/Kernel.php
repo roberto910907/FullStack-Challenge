@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(UpdateUserWeather::class)->everyMinute();
+        $schedule->command(UpdateUserWeather::class)->everyTenMinutes();
     }
 
     /**

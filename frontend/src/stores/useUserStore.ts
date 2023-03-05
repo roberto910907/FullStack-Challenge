@@ -1,9 +1,16 @@
 import { defineStore } from "pinia";
 import { useFetch } from "@/composables/useFetch";
 
+type WeatherInfo = {
+  main: string;
+  description: string;
+};
+
 type User = {
   id: number;
+  name: string;
   email: string;
+  weather: WeatherInfo;
 };
 
 type UserResult = {
