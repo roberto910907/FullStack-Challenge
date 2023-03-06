@@ -23,8 +23,8 @@ import Pusher from "pusher-js";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/useUserStore";
 
-import WeatherReport from "@/components/Modal/WeatherReport.vue";
-import WeatherInfoCard from "@/components/WeatherInfoCard.vue";
+import WeatherReport from "@/components/Weather/Modal/Report.vue";
+import WeatherInfoCard from "@/components/Weather/InfoCard.vue";
 
 const userStore = useUserStore();
 const { users, showReport, userInfo } = storeToRefs(userStore);

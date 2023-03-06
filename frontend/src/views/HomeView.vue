@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import WeatherDashboard from "@/components/WeatherDashboard.vue";
+import WeatherDashboard from "@/components/Weather/Dashboard.vue";
 </script>
