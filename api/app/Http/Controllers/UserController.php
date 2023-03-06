@@ -10,10 +10,6 @@ class UserController extends Controller
 {
     public function list(): JsonResponse
     {
-        //TODO: Fix this line to optimize the cache calls
-        // $usersCacheKeys = User::query()->get('id')->map(fn(User $user) => 'weather:user:' . $user->id);
-        //$usersData = Redis::connection('cache')->mget($usersCacheKeys);
-
         $usersWeatherData = User::query()->get('id')->mapWithKeys(function (User $user) {
             return [$user->id => Cache::get('weather:user:' . $user->id)];
         });

@@ -70,6 +70,7 @@ class WeatherForecastService
     {
         $cacheKey = "weather:user:" . $user->id;
 
+        Cache::forget($cacheKey);
         Cache::rememberForever($cacheKey, function () use ($user, $weatherForecastInfo) {
             return [
                 'id' => $user->id,
