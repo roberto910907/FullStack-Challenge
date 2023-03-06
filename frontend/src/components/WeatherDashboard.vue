@@ -1,9 +1,18 @@
 <template>
-  <div class="h-100hv grid grid-cols-4 gap-4 p-4">
+  <WeatherReport
+    :show="showReport"
+    :title="userInfo.name"
+    subtitle="Weather Forecast"
+    content="Here's a summary of the weather forecast showing some of the most important metrics"
+    @close="showReport = false"
+  />
+
+  <div class="h-100hv grid grid-cols-4 gap-6 p-4">
     <div
       v-for="user in users"
       :key="user.id"
-      class="bg-indigo-100/75 rounded-lg border border-violet-200 shadow-lg px-4 py-1"
+      class="bg-indigo-100/75 rounded-lg border border-violet-200 shadow-lg px-4 py-1 hover:cursor-pointer hover:shadow-2xl"
+      @click="userStore.showUserReport(user)"
     >
       <div class="flex justify-between items-center my-2">
         <div>
@@ -37,8 +46,10 @@
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/useUserStore";
 
+import WeatherReport from "@/components/Modal/WeatherReport.vue";
+
 const userStore = useUserStore();
-const { users } = storeToRefs(userStore);
+const { users, showReport, userInfo } = storeToRefs(userStore);
 
 userStore.loadUsers();
 </script>
