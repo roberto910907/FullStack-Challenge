@@ -58,17 +58,13 @@ class WeatherForecastService
                 'description' => $weatherForecastInfo['weather'][0]['description'],
             ];
         } else {
-            throw new Exception('Failed to retrieve weather information from ' . $weatherApiUrl);
+            throw new Exception('Failed to retrieve weather information from '.$weatherApiUrl);
         }
     }
 
-    /**
-     * @param User $user
-     * @param array $weatherForecastInfo
-     */
     public function updateUserWeatherCache(User $user, array $weatherForecastInfo): void
     {
-        $cacheKey = "weather:user:" . $user->id;
+        $cacheKey = 'weather:user:'.$user->id;
 
         Cache::forget($cacheKey);
         Cache::rememberForever($cacheKey, function () use ($user, $weatherForecastInfo) {
@@ -81,13 +77,7 @@ class WeatherForecastService
         });
     }
 
-    /**
-     * @param string $latitude
-     * @param string $longitude
-     *
-     * @return string
-     */
-    private function getWeatherApiUrl(string $latitude, string $longitude): string
+    public function getWeatherApiUrl(string $latitude, string $longitude): string
     {
         return Str::swap([
             '{lat}' => $latitude,

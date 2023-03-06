@@ -11,7 +11,7 @@ class UserController extends Controller
     public function list(): JsonResponse
     {
         $usersWeatherData = User::query()->get('id')->mapWithKeys(function (User $user) {
-            return [$user->id => Cache::get('weather:user:' . $user->id)];
+            return [$user->id => Cache::get('weather:user:'.$user->id)];
         });
 
         return response()->json([
