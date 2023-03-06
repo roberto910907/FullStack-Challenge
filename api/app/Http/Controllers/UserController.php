@@ -14,7 +14,9 @@ class UserController extends Controller
         // $usersCacheKeys = User::query()->get('id')->map(fn(User $user) => 'weather:user:' . $user->id);
         //$usersData = Redis::connection('cache')->mget($usersCacheKeys);
 
-        $usersWeatherData = User::query()->get('id')->map(fn(User $user) => Cache::get('weather:user:' . $user->id));
+        $usersWeatherData = User::query()->get('id')->mapWithKeys(function (User $user) {
+            return [$user->id => Cache::get('weather:user:' . $user->id)];
+        });
 
         return response()->json([
             'users' => $usersWeatherData,

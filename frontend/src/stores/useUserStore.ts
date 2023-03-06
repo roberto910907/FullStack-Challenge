@@ -11,7 +11,7 @@ type WeatherInfo = {
   description: string;
 };
 
-type User = {
+export type User = {
   id: number;
   name: string;
   email: string;
