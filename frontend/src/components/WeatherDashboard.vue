@@ -7,7 +7,7 @@
     @close="showReport = false"
   />
 
-  <div class="h-100hv grid grid-cols-4 gap-6 p-4">
+  <div class="h-100hv grid sm:grid-cols-4 gap-3 p-2 sm:gap-6 sm:p-4">
     <WeatherInfoCard
       v-for="user in users"
       :key="user.id"
