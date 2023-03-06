@@ -44,6 +44,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
+import Pusher from "pusher-js";
 import { useUserStore } from "@/stores/useUserStore";
 
 import WeatherReport from "@/components/Modal/WeatherReport.vue";
@@ -52,4 +53,14 @@ const userStore = useUserStore();
 const { users, showReport, userInfo } = storeToRefs(userStore);
 
 userStore.loadUsers();
+
+const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
+  cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+});
+
+const channel = pusher.subscribe("weather-channel");
+
+channel.bind("weather.updated", function (data: Object) {
+  console.log(JSON.stringify(data));
+});
 </script>

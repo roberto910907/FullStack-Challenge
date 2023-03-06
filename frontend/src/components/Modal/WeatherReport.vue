@@ -100,7 +100,6 @@
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { defineProps, defineEmits } from "vue";
 import { useUserStore } from "@/stores/useUserStore";
 
 interface Props {

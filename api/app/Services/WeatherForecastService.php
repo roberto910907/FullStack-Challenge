@@ -7,6 +7,7 @@ namespace App\Services;
 use Exception;
 use App\Models\User;
 use Illuminate\Support\Str;
+use App\Events\UserWeatherUpdated;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use App\Repositories\WeatherForecastRepository;
@@ -28,6 +29,8 @@ class WeatherForecastService
         $this->updateUserWeatherCache($user, $weatherForecastInfo);
 
         $this->weatherForecastRepository->updateOrCreateFromArray($user->id, $weatherForecastInfo);
+
+        event(new UserWeatherUpdated($user));
     }
 
     /**
